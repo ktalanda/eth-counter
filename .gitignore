@@ -1,0 +1,4 @@
+.idea
+.truffle-solidity-loader
+node_modules
+build
