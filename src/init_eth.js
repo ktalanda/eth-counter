@@ -9,4 +9,4 @@ window.addEventListener('load', function() {
     }
 });
 
-SampleContract.setProvider(window.web3.currentProvider)
+SampleContract.setProvider(window.web3.currentProvider);
