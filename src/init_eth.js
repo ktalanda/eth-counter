@@ -1,12 +1,10 @@
 import Web3 from "web3";
-import SampleContract from "../contracts/Sample.sol";
 
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
     if (typeof web3 !== 'undefined') {
         window.web3 = new Web3(web3.currentProvider);
     } else {
-        console.log("No web3 provider found.");
+        window.web3Provider = new web3.providers.HttpProvider('http://localhost:8545');
+        window.web3 = new Web3(window.web3Provider);
     }
 });
-
-SampleContract.setProvider(window.web3.currentProvider);
