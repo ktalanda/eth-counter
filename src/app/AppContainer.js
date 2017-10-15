@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import App from './AppComponent';
-import SampleContract from "../../contracts/Sample.sol";
+import SampleContract from "../../build/contracts/MetaCoin.json";
 
 export const mapStateToProps = (state) => {
     return {};
