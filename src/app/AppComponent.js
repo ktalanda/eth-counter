@@ -6,17 +6,22 @@ import PropTypes from 'prop-types'
 const App = (props) => (
   <div style={containerStyle}>
     <button onClick={props.buy} style={buttonStyle}>
-      BUY
+      INCREMENT
+    </button>
+    <button onClick={props.init} style={buttonStyle}>
+      READ COUNTER
     </button>
   </div>
 )
 
 App.propTypes = {
+  init: PropTypes.func.isRequired,
   buy: PropTypes.func.isRequired
 }
 
 const containerStyle = {
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   height: '100%'

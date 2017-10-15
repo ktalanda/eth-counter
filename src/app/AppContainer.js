@@ -1,21 +1,28 @@
 import App from './AppComponent'
 import { connect } from 'react-redux'
-import SampleContract from '../../build/contracts/MetaCoin.json'
+import SimpleStorageContract from '../../build/contracts/SimpleStorage.json'
+import contract from 'truffle-contract'
 
 export const mapStateToProps = (state) => {
-  return { }
+  return {}
 }
 
 export const mapDispatchToProps = (dispatch) => {
-  return { buy }
-}
-
-export const buy = () => {
-  SampleContract.setProvider(window.web3.currentProvider)
-
-  SampleContract.deployed().then((instance) => {
-    console.log(instance)
-  })
+  return {
+    init: () => {
+      const simpleStorage = contract(SimpleStorageContract)
+      simpleStorage.setProvider(window.web3.currentProvider)
+      simpleStorage.deployed().then(instance => instance.get()).then(window.alert)
+    },
+    buy: () => {
+      window.web3.eth.getAccounts((error, accounts) => {
+        if (error) console.log(error)
+        const simpleStorage = contract(SimpleStorageContract)
+        simpleStorage.setProvider(window.web3.currentProvider)
+        simpleStorage.deployed().then(instance => instance.add({ from: accounts[0] }))
+      })
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
