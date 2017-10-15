@@ -1,13 +1,14 @@
-Ethereum:
+## Ethereum:
 
-Install truffle cli: https://github.com/trufflesuite/truffle-core
-Based on truffle webpack sample `truffle unbox webpack`
+Install truffle cli: https://github.com/trufflesuite/truffle-core.
+
+Based on truffle webpack sample http://truffleframework.com/boxes/webpack.
 
 * Compile: `truffle compile`.
 * Migrate: `truffle migrate`.
 * Test: `truffle test`.
 
-Webapp:
+## Webapp:
 
 * Lint: `npm run lint`
 * Build: `npm run build`.
