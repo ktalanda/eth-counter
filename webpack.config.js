@@ -1,6 +1,6 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const path = require("path");
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   entry: './src/index.js',
@@ -13,7 +13,7 @@ module.exports = {
       {
         test: /\.(js|jsx|es6)$/,
         exclude: /node_modules/,
-        loaders: ["react-hot-loader", "babel-loader"]
+        loaders: ['react-hot-loader', 'babel-loader']
       }
     ]
   },
@@ -21,12 +21,12 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: './src/index.html',
-        to: "index.html"
+        to: 'index.html'
       }
     ]),
-    new ExtractTextPlugin("app.css")
+    new ExtractTextPlugin('app.css')
   ],
   devServer: {
     stats: 'errors-only'
   }
-};
+}

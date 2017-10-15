@@ -1,23 +1,21 @@
-import {connect} from 'react-redux';
-import App from './AppComponent';
-import SampleContract from "../../build/contracts/MetaCoin.json";
+import App from './AppComponent'
+import { connect } from 'react-redux'
+import SampleContract from '../../build/contracts/MetaCoin.json'
 
 export const mapStateToProps = (state) => {
-    return {};
-};
+  return { }
+}
 
 export const mapDispatchToProps = (dispatch) => {
-    return {
-        buy
-    }
-};
+  return { buy }
+}
 
 export const buy = () => {
-    SampleContract.setProvider(window.web3.currentProvider);
+  SampleContract.setProvider(window.web3.currentProvider)
 
-    SampleContract.deployed().then((instance) => {
-        console.log(instance);
-    });
-};
+  SampleContract.deployed().then((instance) => {
+    console.log(instance)
+  })
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)
