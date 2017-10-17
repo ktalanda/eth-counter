@@ -18,7 +18,7 @@ contract('SimpleStorage', (accounts) => {
       return instance.get()
     }).then(transactionNumber => {
       initialState = transactionNumber
-      contract.add()
+      contract.increment()
       return contract.get()
     }).then(transactionNumber => {
       const actual = transactionNumber
