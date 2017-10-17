@@ -5,18 +5,18 @@ import PropTypes from 'prop-types'
 
 const App = (props) => (
   <div style={containerStyle}>
-    <button onClick={props.buy} style={buttonStyle}>
+    <button onClick={props.increment} style={buttonStyle}>
       INCREMENT
     </button>
-    <button onClick={props.init} style={buttonStyle}>
-      READ COUNTER
-    </button>
+    <div>
+      {props.counter}
+    </div>
   </div>
 )
 
 App.propTypes = {
-  init: PropTypes.func.isRequired,
-  buy: PropTypes.func.isRequired
+  counter: PropTypes.number,
+  increment: PropTypes.func.isRequired
 }
 
 const containerStyle = {
