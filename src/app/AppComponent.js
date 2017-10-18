@@ -3,16 +3,26 @@ import React from 'react'
 /* eslint-enable no-unused-vars */
 import PropTypes from 'prop-types'
 
-const App = (props) => (
-  <div style={containerStyle}>
-    <button onClick={props.increment} style={buttonStyle}>
-      INCREMENT
-    </button>
-    <div>
-      {props.counter}
-    </div>
-  </div>
-)
+class App extends React.Component {
+  constructor (props) {
+    super(props)
+    props.init()
+  }
+
+  render () {
+    return (
+      <div style={containerStyle}>
+        <button onClick={this.props.increment} style={buttonStyle}>
+          INCREMENT
+        </button>
+        <br />
+        <h1>
+          {this.props.counter}
+        </h1>
+      </div>
+    )
+  }
+}
 
 App.propTypes = {
   counter: PropTypes.number,
