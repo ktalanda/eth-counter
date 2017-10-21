@@ -2,7 +2,11 @@
 
 Install truffle cli: https://github.com/trufflesuite/truffle-core.
 
+Install testrpc https://github.com/ethereumjs/testrpc
+
 Based on truffle webpack sample http://truffleframework.com/boxes/webpack.
+
+* Run testrpc: `testrpc`
 
 * Compile: `truffle compile`.
 * Migrate: `truffle migrate`.

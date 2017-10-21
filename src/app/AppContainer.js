@@ -1,36 +1,29 @@
-import App from './AppComponent'
 import { connect } from 'react-redux'
-import SimpleStorageContract from '../../build/contracts/SimpleStorage.json'
-import contract from 'truffle-contract'
-import { changeCounter } from './actions'
+import App from './AppComponent'
+import {
+  init as initContract,
+  getCounter as getCounterContract,
+  incrementCounter as incrementCounterContract
+} from '../contracts'
 
-const simpleStorage = contract(SimpleStorageContract)
-simpleStorage.setProvider(window.web3.currentProvider)
+import { changeCounter as changeCounterAction } from './actions'
 
-export const mapStateToProps = (state) => {
-  return {
-    counter: state.app.counter
+export const mapStateToProps = (state) => ({ counter: state.app.counter })
+
+export const mapDispatchToProps = (dispatch) => ({
+  init: () => {
+    initContract()
+      .then(_ => getCounterContract())
+      .then(counter => dispatch(changeCounterAction(parseInt(counter))))
+  },
+  increment: () => {
+    incrementCounterContract()
+      .then(_ => window.alert('Success! Wait for mining and reload.'))
+  },
+  reload: () => {
+    getCounterContract()
+      .then(counter => dispatch(changeCounterAction(parseInt(counter))))
   }
-}
-
-export const mapDispatchToProps = (dispatch) => {
-  return {
-    init: () => {
-      simpleStorage.deployed()
-        .then(instance => instance.get())
-        .then(counter => dispatch(changeCounter(parseInt(counter))))
-    },
-    increment: () => {
-      window.web3.eth.getAccounts((error, accounts) => {
-        if (error) console.log(error)
-        simpleStorage.deployed()
-          .then(instance => instance.increment({ from: accounts[0] }))
-          .then(() => simpleStorage.deployed())
-          .then(instance => instance.get())
-          .then(counter => dispatch(changeCounter(parseInt(counter))))
-      })
-    }
-  }
-}
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 /* eslint-enable no-unused-vars */
+
 import PropTypes from 'prop-types'
 
 class App extends React.Component {
@@ -15,6 +16,9 @@ class App extends React.Component {
         <button onClick={this.props.increment} style={buttonStyle}>
           INCREMENT
         </button>
+        <button onClick={this.props.reload} style={smallButtonStyle}>
+          RELOAD
+        </button>
         <br />
         <h1>
           {this.props.counter}
@@ -26,7 +30,9 @@ class App extends React.Component {
 
 App.propTypes = {
   counter: PropTypes.number,
-  increment: PropTypes.func.isRequired
+  init: PropTypes.func.isRequired,
+  increment: PropTypes.func.isRequired,
+  reload: PropTypes.func.isRequired
 }
 
 const containerStyle = {
@@ -40,6 +46,12 @@ const containerStyle = {
 const buttonStyle = {
   width: 200,
   height: 200,
+  fontSize: 20
+}
+
+const smallButtonStyle = {
+  width: 200,
+  height: 50,
   fontSize: 20
 }
 
