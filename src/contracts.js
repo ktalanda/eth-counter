@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 import contract from 'truffle-contract'
 
-import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
+import SimpleCounterContract from '../build/contracts/SimpleCounter.json'
 
 export const init = () => {
   return Promise.resolve().then(() => {
@@ -12,25 +12,30 @@ export const init = () => {
 }
 
 export const getCounter = () => {
-  return deploy()
+  return deployCounter()
     .then(instance => instance.get())
 }
 
 export const incrementCounter = () => {
-  let _accounts
+  let _account
+  return getFirstAccount()
+    .then(account => {
+      _account = account
+      return deployCounter()
+    }).then(instance => instance.increment({ from: _account }))
+}
+
+const getFirstAccount = () => {
   return new Promise((resolve, reject) => {
     return window.web3.eth.getAccounts((error, accounts) => {
       if (error) reject(error)
       resolve(accounts)
     })
-  }).then(accounts => {
-    _accounts = accounts
-    return deploy()
-  }).then(instance => instance.increment({ from: _accounts[0] }))
+  }).then(accounts => accounts[0])
 }
 
-const deploy = () => {
-  const simpleStorage = contract(SimpleStorageContract)
-  simpleStorage.setProvider(window.web3.currentProvider)
-  return simpleStorage.deployed()
+const deployCounter = () => {
+  const simpleCounter = contract(SimpleCounterContract)
+  simpleCounter.setProvider(window.web3.currentProvider)
+  return simpleCounter.deployed()
 }

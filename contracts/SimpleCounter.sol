@@ -1,6 +1,6 @@
 pragma solidity ^0.4.4;
 
-contract SimpleStorage {
+contract SimpleCounter {
   uint transactionNumber = 0;
 
   function get() constant returns (uint) {
