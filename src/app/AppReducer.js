@@ -1,5 +1,10 @@
 const initialState = {
-  counter: 0
+  counter: 0,
+  blockinfo: {
+    number: 0,
+    hash: '',
+    gasUsed: 0
+  }
 }
 
 export default(state = initialState, action) => {
@@ -8,6 +13,11 @@ export default(state = initialState, action) => {
       return {
         ...state,
         counter: action.newCounter
+      }
+    case 'SET_BLOCK_INFO':
+      return {
+        ...state,
+        blockinfo: action.newBlockInfo
       }
     default:
       return state

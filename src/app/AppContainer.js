@@ -5,16 +5,28 @@ import {
   getCounter as getCounterContract,
   incrementCounter as incrementCounterContract
 } from '../contracts'
+import {
+  getLastBlock
+} from '../blockinfo'
 
-import { changeCounter as changeCounterAction } from './actions'
+import {
+  changeCounter as changeCounterAction,
+  changeBlockInfo as changeBlockInfoAction
+} from './actions'
 
-export const mapStateToProps = (state) => ({ counter: state.app.counter })
+export const mapStateToProps = (state) => ({
+  counter: state.app.counter,
+  blockInfo: state.app.blockinfo
+})
 
 export const mapDispatchToProps = (dispatch) => ({
   init: () => {
     initContract()
       .then(_ => getCounterContract())
-      .then(counter => dispatch(changeCounterAction(parseInt(counter))))
+      .then(parseInt)
+      .then(counter => dispatch(changeCounterAction(counter)))
+      .then(_ => getLastBlock())
+      .then(block => dispatch(changeBlockInfoAction(block)))
   },
   increment: () => {
     incrementCounterContract()
@@ -23,6 +35,8 @@ export const mapDispatchToProps = (dispatch) => ({
   reload: () => {
     getCounterContract()
       .then(counter => dispatch(changeCounterAction(parseInt(counter))))
+      .then(_ => getLastBlock())
+      .then(block => dispatch(changeBlockInfoAction(block)))
   }
 })
 

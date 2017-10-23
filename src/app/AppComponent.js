@@ -19,10 +19,39 @@ class App extends React.Component {
         <button onClick={this.props.reload} style={smallButtonStyle}>
           RELOAD
         </button>
-        <br />
+        <br/>
         <h1>
           {this.props.counter}
         </h1>
+        <h2>Last block</h2>
+        <table>
+          <tbody>
+            <tr>
+              <td style={tableTitleStyle}>
+                <b>Block number:</b>
+              </td>
+              <td>{this.props.blockInfo.number}</td>
+            </tr>
+            <tr>
+              <td style={tableTitleStyle}>
+                <b>Hash:</b>
+              </td>
+              <td>{this.props.blockInfo.hash}</td>
+            </tr>
+            <tr>
+              <td style={tableTitleStyle}>
+                <b>Parent Hash:</b>
+              </td>
+              <td>{this.props.blockInfo.parentHash}</td>
+            </tr>
+            <tr>
+              <td style={tableTitleStyle}>
+                <b>Gas used:</b>
+              </td>
+              <td>{this.props.blockInfo.gasUsed}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     )
   }
@@ -32,7 +61,8 @@ App.propTypes = {
   counter: PropTypes.number,
   init: PropTypes.func.isRequired,
   increment: PropTypes.func.isRequired,
-  reload: PropTypes.func.isRequired
+  reload: PropTypes.func.isRequired,
+  blockInfo: PropTypes.object
 }
 
 const containerStyle = {
@@ -41,6 +71,13 @@ const containerStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   height: '100%'
+}
+
+const tableTitleStyle = {
+  textAlign: 'right',
+  paddingRight: 10,
+  borderRightStyle: 'solid',
+  borderWidth: 1
 }
 
 const buttonStyle = {
